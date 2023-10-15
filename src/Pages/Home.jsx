@@ -1,3 +1,4 @@
+import Banner from "../Components/Banner/Banner"
 import Navbar from "../Components/Navbar/Navbar"
 
 function Home() {
@@ -5,6 +6,7 @@ function Home() {
   return( 
 <div>
 <Navbar/>
+<Banner/>
 </div>
 
   )
