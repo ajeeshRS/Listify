@@ -1,0 +1,49 @@
+.task-containers {
+  width: 100%;
+  height: 80svh;
+}
+
+.input-field {
+  height: 40px;
+  width: 300px;
+  border-radius: 10px;
+  background: #edebeb;
+  border: #cdcdcd;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: medium;
+  transition: all 0.3s;
+}
+.input-field:hover {
+  outline: 0;
+  background: #dddcdc;
+}
+.input-field:focus {
+  outline: 0;
+  border-color: #a4a3a3;
+  background: #dddcdc;
+}
+
+.main-container {
+  width: 100%;
+}
+.svg-img {
+  width: 50px;
+  height: 50px;
+}
+.task-head {
+  font-family: "poppins", sans-serif;
+  font-weight: bold;
+}
+
+.task {
+  list-style-type: none;
+}
+
+li {
+  font-family: "montserrat", sans-serif;
+  font-weight: 400;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
