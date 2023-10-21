@@ -1,10 +1,10 @@
 import { AppBar, IconButton, Toolbar } from "@mui/material";
 import "./NavBar.css";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Navbar() {
-  const navigate = useNavigate();
-
+  
+ 
   return (
     <div className="container">
       <AppBar
@@ -39,13 +39,14 @@ function Navbar() {
             },
           }}
         >
+        <Link to='/' style={{textDecoration:'none'}}>
           <p
-            onClick={() => navigate("/")}
             className="hero"
             style={{ color: "black", cursor: "pointer" }}
           >
             Listify<span>.</span>{" "}
           </p>
+          </Link>
           <div className="btn-group">
             <IconButton>
               <img className="img-svg" src="/User_box_fill.svg" />

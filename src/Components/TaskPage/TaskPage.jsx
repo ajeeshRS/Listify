@@ -1,6 +1,6 @@
 import { Checkbox, Grid, Icon, IconButton, Typography } from "@mui/material";
 import "./TaskPage.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   CheckCircle,
   Delete,
@@ -14,6 +14,30 @@ function TaskPage() {
   const [items, setItems] = useState([]);
   const [completedTasks, setCompletedTasks] = useState([]);
   const [recentlyDeleted, setRecentlyDeleted] = useState([]);
+
+  useEffect(() => {
+    const data = window.localStorage.getItem("ITEM");
+    const data2 = window.localStorage.getItem("COMPLETED_TASK");
+    const data3 = window.localStorage.getItem("RECENTLY_DELETED");
+
+    if ((data, data2, data3)) {
+      setItems(JSON.parse(data));
+      setCompletedTasks(JSON.parse(data2));
+      setRecentlyDeleted(JSON.parse(data3));
+    }
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("ITEM", JSON.stringify(items));
+    window.localStorage.setItem(
+      "COMPLETED_TASK",
+      JSON.stringify(completedTasks)
+    );
+    window.localStorage.setItem(
+      "RECENTLY_DELETED",
+      JSON.stringify(recentlyDeleted)
+    );
+  }, [items, completedTasks, recentlyDeleted]);
 
   const addButtonHandler = () => {
     if (!inputValue) {
@@ -37,7 +61,7 @@ function TaskPage() {
     setRecentlyDeleted((prevTask) => [...prevTask, task]);
     setItems(items.filter((item) => item !== task));
   };
-  const maxLength = 40;
+  const maxLength = 30;
   return (
     <div className="task-containers">
       <Grid className="main-container" container md={12}>
@@ -53,11 +77,11 @@ function TaskPage() {
             className="input-field"
             type="text"
             value={inputValue}
-            maxLength={40}
+            maxLength={30}
             placeholder="Enter task"
             onChange={(e) => setInputValue(e.target.value)}
           />
-          <IconButton onClick={addButtonHandler}>
+          <IconButton onClick={addButtonHandler} style={{ marginLeft: "15px" }}>
             <img className="svg-img" src="/Add_square_fill.svg" />
           </IconButton>
         </Grid>
@@ -68,7 +92,18 @@ function TaskPage() {
             </Typography>
           </Grid>
         )}
-        <Grid container md={12}>
+        <Grid
+          container
+          md={12}
+          sx={{
+            marginLeft: {
+              xs: "-19px",
+              sm: "20px",
+              lg: "20px",
+              xl: "20px",
+            },
+          }}
+        >
           {
             <Typography
               ml={7}
@@ -83,21 +118,21 @@ function TaskPage() {
               Tasks({items.length})
             </Typography>
           }
-          <Grid container md={12} mt={2} ml={3}>
+          <Grid container md={12} mt={2} ml={2}>
             <ul>
               {items.length > 0 ? (
                 items.map((item) => {
                   return (
                     <li className="task" key={item.id}>
-                      <Checkbox
-                        icon={<RadioButtonUnchecked />}
-                        onChange={() => completeTaskHandler(item)}
-                      />
-                      {item.value}
+                      <div className="check-p-container">
+                        <Checkbox
+                          icon={<RadioButtonUnchecked />}
+                          onChange={() => completeTaskHandler(item)}
+                        />
+                        <p>{item.value}</p>
+                      </div>
                       <IconButton
                         style={{
-                          position: "absolute",
-                          left: "550px",
                           paddingLeft: "10px",
                           paddingBottom: "15px",
                         }}
@@ -122,7 +157,18 @@ function TaskPage() {
             </ul>
           </Grid>
         </Grid>
-        <Grid container md={12}>
+        <Grid
+          container
+          md={12}
+          sx={{
+            marginLeft: {
+              xs: "-19px",
+              sm: "20px",
+              lg: "20px",
+              xl: "20px",
+            },
+          }}
+        >
           {
             <Typography
               ml={7}
@@ -158,10 +204,12 @@ function TaskPage() {
                         listStyleType: "none",
                       }}
                     >
-                      <Icon style={{ paddingRight: "10px" }}>
-                        <CheckCircle />
-                      </Icon>
-                      {item.value}
+                      <div className="check-p-container">
+                        <Icon style={{ paddingRight: "10px" }}>
+                          <CheckCircle />
+                        </Icon>
+                        <p>{item.value}</p>
+                      </div>
                     </li>
                   );
                 })
@@ -179,7 +227,18 @@ function TaskPage() {
             </ul>
           </Grid>
         </Grid>
-        <Grid container md={12}>
+        <Grid
+          container
+          md={12}
+          sx={{
+            marginLeft: {
+              xs: "-19px",
+              sm: "20px",
+              lg: "20px",
+              xl: "20px",
+            },
+          }}
+        >
           {
             <Typography
               ml={7}
@@ -209,11 +268,12 @@ function TaskPage() {
                 recentlyDeleted.map((item) => {
                   return (
                     <li style={{ listStyleType: "none" }} key={item.id}>
-                      {" "}
-                      <Icon style={{ paddingRight: "10px" }}>
-                        <DeleteSweep />
-                      </Icon>
-                      {item.value}
+                      <div className="check-p-container">
+                        <Icon style={{ paddingRight: "10px" }}>
+                          <DeleteSweep />
+                        </Icon>
+                        <p>{item.value}</p>
+                      </div>
                     </li>
                   );
                 })

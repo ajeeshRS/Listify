@@ -1,9 +1,8 @@
 import { Grid, IconButton, Typography } from "@mui/material";
 import "./Banner.css";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Banner() {
-  const navigate = useNavigate();
   return (
     <div>
       <Grid container md={12} className="main-container">
@@ -31,9 +30,11 @@ function Banner() {
           </Typography>
         </Grid>
         <Grid container md={12} mb={5} className="grid-button">
-          <IconButton onClick={() => navigate("/add-task")}>
+        <Link to='/add-task'>
+          <IconButton>
             <img className="img-svg" src="/Add_square_fill.svg" />
           </IconButton>
+          </Link>
         </Grid>
       </Grid>
     </div>
