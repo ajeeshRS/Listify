@@ -5,7 +5,7 @@ import { HashRouter } from 'react-router-dom'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   
-      <HashRouter>
+      <HashRouter basename="/listify">
         <App />
       </HashRouter>
  
